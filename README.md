@@ -1,3 +1,2 @@
 # Quote-and-bracket-values
-A useful tool for when you need to put a load of values into an SQL IN statement.
-Handy when someone gives you a spreadsheet with a load of IDs you need to filter in a WHERE clause.
+A simple tool for converting large lists of values into a SQL-ready IN (...) clause. Useful when pasting IDs from spreadsheets or exports.
