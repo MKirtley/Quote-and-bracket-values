@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quote and Bracket Values</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 500px;
+            height: 365px;
+        }
+        #output {
+            width: 500px;
+            height: 365px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Single Quotes Around a List of Values</h2>
+    <p>Enter the values below (one per line):</p>
+    <textarea id="inputValues" placeholder="Enter values here..."></textarea><br>
+    <button onclick="transformValues()">Quote Those Values</button>
+    <button onclick="clearText()">Clear</button><br>
+    <textarea id="output" readonly placeholder="Output."></textarea><br>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+
+    <script>
+        function transformValues() {
+            let input = document.getElementById('inputValues').value;
+            let lines = input.split('\n');
+            
+            // Trim whitespace and remove empty lines
+            lines = lines.map(line => line.trim()).filter(line => line !== '');
+            
+            if (lines.length === 0) {
+                document.getElementById('output').value = '';
+                return;
+            }
+            
+            // Wrap the first value
+            lines[0] = `('${lines[0]}'`;
+            
+            // Wrap the remaining values
+            for (let i = 1; i < lines.length; i++) {
+                lines[i] = `,'${lines[i]}'`;
+            }
+            
+            // Close the parenthesis
+            lines[lines.length - 1] = lines[lines.length - 1] + ')';
+            
+            let output = lines.join('\n');
+            
+            document.getElementById('output').value = output;
+        }
+
+        function copyToClipboard() {
+            let outputTextarea = document.getElementById('output');
+            outputTextarea.select();
+            document.execCommand("copy");
+        }
+        
+        function clearText() {
+            document.getElementById('inputValues').value = '';
+            document.getElementById('output').value = '';
+        }
+    </script>
+
+</body>
+</html>
